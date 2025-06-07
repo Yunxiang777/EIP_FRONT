@@ -18,11 +18,13 @@ const Login: React.FC = () => {
 
     try {
       const success = await login(email, password);
+      return;
       if (success) {
         navigate('/profile');
       } else {
         setError('電子郵件或密碼錯誤');
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError('登入失敗，請稍後再試');
     } finally {
@@ -55,13 +57,13 @@ const Login: React.FC = () => {
             )}
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="text" className="block text-sm font-medium text-gray-700 mb-2">
                 電子郵件
               </label>
               <input
                 id="email"
                 name="email"
-                type="email"
+                type="text"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

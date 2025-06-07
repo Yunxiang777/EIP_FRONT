@@ -1,12 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { LeaveRequest } from '../types';
-import { 
-  Plus, 
-  Calendar, 
-  Clock, 
-  CheckCircle, 
-  XCircle, 
+import {
+  Plus,
+  Calendar,
+  CheckCircle,
+  XCircle,
   AlertCircle,
   Filter,
   Search
@@ -103,24 +102,24 @@ const Leave: React.FC = () => {
 
   const filteredRequests = useMemo(() => {
     let filtered = allRequests;
-    
+
     if (filter !== 'all') {
       filtered = filtered.filter(req => req.status === filter);
     }
-    
+
     if (searchTerm) {
-      filtered = filtered.filter(req => 
+      filtered = filtered.filter(req =>
         req.employeeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         req.reason.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    
+
     return filtered.sort((a, b) => new Date(b.appliedDate).getTime() - new Date(a.appliedDate).getTime());
   }, [allRequests, filter, searchTerm]);
 
   const handleSubmitRequest = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!newRequest.startDate || !newRequest.endDate || !newRequest.reason) {
       alert('請填寫所有必要欄位');
       return;
@@ -241,13 +240,13 @@ const Leave: React.FC = () => {
                             {statusLabels[request.status]}
                           </span>
                         </div>
-                        
+
                         {user?.role === 'manager' && (
                           <p className="text-sm text-gray-600 mb-2">
                             申請人: {request.employeeName}
                           </p>
                         )}
-                        
+
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
                           <div>
                             <p className="text-sm text-gray-500">請假期間</p>
@@ -260,12 +259,12 @@ const Leave: React.FC = () => {
                             <p className="text-sm font-medium text-gray-900">{request.days} 天</p>
                           </div>
                         </div>
-                        
+
                         <div className="mb-3">
                           <p className="text-sm text-gray-500">請假原因</p>
                           <p className="text-sm text-gray-900">{request.reason}</p>
                         </div>
-                        
+
                         <div className="text-xs text-gray-500">
                           申請日期: {new Date(request.appliedDate).toLocaleDateString('zh-TW')}
                           {request.approvedBy && (
@@ -275,7 +274,7 @@ const Leave: React.FC = () => {
                             <> • 審核日期: {new Date(request.approvedDate).toLocaleDateString('zh-TW')}</>
                           )}
                         </div>
-                        
+
                         {request.comments && (
                           <div className="mt-3 p-3 bg-gray-50 rounded-md">
                             <p className="text-sm text-gray-600">
@@ -284,7 +283,7 @@ const Leave: React.FC = () => {
                           </div>
                         )}
                       </div>
-                      
+
                       {user?.role === 'manager' && request.status === 'pending' && (
                         <div className="ml-4 flex flex-col space-y-2">
                           <button
@@ -318,7 +317,7 @@ const Leave: React.FC = () => {
               <div className="mb-4">
                 <h3 className="text-lg font-medium text-gray-900">申請請假</h3>
               </div>
-              
+
               <form onSubmit={handleSubmitRequest} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -335,7 +334,7 @@ const Leave: React.FC = () => {
                     <option value="emergency">緊急假</option>
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     開始日期
@@ -348,7 +347,7 @@ const Leave: React.FC = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     結束日期
@@ -361,7 +360,7 @@ const Leave: React.FC = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     請假原因
@@ -375,7 +374,7 @@ const Leave: React.FC = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="flex justify-end space-x-3 pt-4">
                   <button
                     type="button"
