@@ -1,13 +1,10 @@
 export interface User {
-  id: string;
-  email: string;
-  name: string;
-  role: 'employee' | 'manager';
-  department: string;
-  position: string;
-  joinDate: string;
-  phone?: string;
-  avatar?: string;
+  user_code: string;
+  user_id: string;
+  user_name: string;
+  user_email: string;
+  user_mobile: string;
+  user_crdat: string;
 }
 
 export interface LeaveRequest {
