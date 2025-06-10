@@ -12,9 +12,9 @@ const AppRoutes: React.FC = () => {
 
   return (
     <Routes>
-      <Route 
-        path="/login" 
-        element={user ? <Navigate to="/profile\" replace /> : <Login />} 
+      <Route
+        path="/login"
+        element={user ? <Navigate to="/profile" replace /> : <Login />}
       />
       <Route
         path="/"
@@ -24,11 +24,11 @@ const AppRoutes: React.FC = () => {
           </ProtectedRoute>
         }
       >
-        <Route index element={<Navigate to="/profile\" replace />} />
+        <Route index element={<Navigate to="/profile" replace />} />
         <Route path="profile" element={<Profile />} />
         <Route path="leave" element={<Leave />} />
       </Route>
-      <Route path="*" element={<Navigate to="/\" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };

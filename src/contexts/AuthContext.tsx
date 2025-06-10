@@ -27,7 +27,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const data = res.data;
 
       if (!data || !data.useR_ID) return false;
-      console.log(data);
 
       // 將後端回傳資料轉換為前端 User 型別
       const user: User = {
@@ -56,11 +55,39 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   /**
-   * 更新使用者資料（僅更新已登入狀態下的部分欄位）
-   * @param data 欲更新的使用者資料
-   */
-  const updateProfile = (data: Partial<User>) => {
-    setUser((prev) => (prev ? { ...prev, ...data } : prev));
+ * 更新使用者資料（同步更新資料庫與前端狀態）
+ * @param data 欲更新的使用者資料（部分欄位）
+ * @returns Promise<boolean> 更新成功回傳 true，失敗拋出錯誤
+ */
+  const updateProfile = async (data: Partial<User>): Promise<boolean> => {
+    if (!user) {
+      throw new Error('No user');
+    }
+
+    // eslint-disable-next-line no-useless-catch
+    try {
+      console.log('Updating user profile with data:', data);
+      console.log(user.user_code);
+
+      const payload = {
+        "useR_NAME": data.user_name,
+        "email": data.user_email,
+        "mobile": data.user_mobile,
+      };
+
+      const res = await axios.put(`http://localhost:5244/api/Auth/${user.user_code.trim()}`, payload);
+
+      if (res.status === 200) {
+        setUser((prev) => (prev ? { ...prev, user_code: prev.user_code.trim(), ...data } : prev));
+        return true;
+      }
+
+      // 若非 200，拋出錯誤
+      throw new Error('Update failed');
+    } catch (error) {
+      // 重新拋出錯誤，讓調用方處理
+      throw error;
+    }
   };
 
   return (

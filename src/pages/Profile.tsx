@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { User as UserIcon, Mail, Phone, Calendar, Edit2, Save, X } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 /**
  * Profile 頁面元件
@@ -32,12 +33,28 @@ const Profile: React.FC = () => {
     });
   };
 
+
   /**
    * 儲存編輯內容，更新全域 user 狀態
    */
-  const handleSave = () => {
-    updateProfile(formData);
-    setIsEditing(false);
+  const handleSave = async () => {
+    try {
+      const promise = updateProfile(formData);
+
+      toast.promise(promise, {
+        loading: '儲存中...',
+        success: '資料更新成功！',
+        error: '資料更新失敗，請稍後再試',
+      });
+
+      const success = await promise;
+      if (success) {
+        setIsEditing(false);
+      }
+    } catch (error) {
+      // toast.promise 已經處理了錯誤顯示，這裡可以做額外的錯誤處理
+      console.error('Save failed:', error);
+    }
   };
 
   /**
