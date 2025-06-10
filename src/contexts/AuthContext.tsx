@@ -27,7 +27,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const data = res.data;
 
       if (!data || !data.useR_ID) return false;
-      console.log(data);
 
       // 將後端回傳資料轉換為前端 User 型別
       const user: User = {
