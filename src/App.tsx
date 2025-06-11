@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Leave from './pages/Leave';
+import Schedule from './pages/Schedule';
 
 const AppRoutes: React.FC = () => {
   const { user } = useAuth();
@@ -26,6 +27,7 @@ const AppRoutes: React.FC = () => {
       >
         <Route index element={<Navigate to="/profile" replace />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="schedule" element={<Schedule />} />
         <Route path="leave" element={<Leave />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />

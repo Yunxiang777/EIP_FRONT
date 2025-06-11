@@ -23,6 +23,7 @@ const Layout: React.FC = () => {
 
   const navigation = [
     { name: '個人資料', href: '/profile', icon: User },
+    { name: '個人班表', href: '/schedule', icon: Calendar }, // 個人班表
     { name: '請假管理', href: '/leave', icon: Calendar },
   ];
 
