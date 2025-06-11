@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import Layout from './components/Layout';
-import ProtectedRoute from './components/ProtectedRoute';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import Leave from './pages/Leave';
-import Schedule from './pages/Schedule';
+import { AuthProvider, useAuth } from '@/contexts/AuthContext';
+import Layout from '@/components/Layout';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import Login from '@/pages/Login';
+import Profile from '@/pages/Profile';
+import Leave from '@/pages/Leave';
+import Schedule from '@/pages/Schedule';
 
 const AppRoutes: React.FC = () => {
   const { user } = useAuth();

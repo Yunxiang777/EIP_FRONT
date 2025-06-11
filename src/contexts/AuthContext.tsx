@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { User, AuthContextType } from '../types';
+import { User, AuthContextType } from '@/types';
 import axios from 'axios';
 
 // 建立 AuthContext，提供全域認證狀態與操作
